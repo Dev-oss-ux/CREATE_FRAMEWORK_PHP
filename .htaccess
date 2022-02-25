@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
+
+    RewriteEngine On
+
+    #Handle Authorization Header
+    #RewriteCond %{HTTP:Authorization} .
+    #RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Les fichiers php doivent passer par index.php
+    RewriteCond %{REQUEST_FILENAME} !index.php$
+    RewriteCond %{REQUEST_FILENAME} php$
+    RewriteRule ^.*$ index.php [L]
+
+    # On garde les ficbier js/css/image tel que
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteCond %{REQUEST_FILENAME} (ico|png|js|gif|jpg|jpeg|css)$
+    RewriteRule ^.*$ - [L]  # on renvoie le fichier tel quel
+
+    # Toutt le reste doit passer par index.php
+    # Handle Front Controller...
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^.*$ index.php [L]
+</IfModule>

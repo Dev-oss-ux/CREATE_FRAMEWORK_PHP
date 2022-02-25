@@ -1,0 +1,11 @@
+{
+    "name": "mamad/mon_framework",
+    "description": "framework php",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Mamad\\MonFramework\\": "src/"
+        }
+    },
+    "require": {}
+}
